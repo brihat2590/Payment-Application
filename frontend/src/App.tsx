@@ -1,5 +1,6 @@
 import Dashboard from "./components/Dashboard";
-import SendMoney from "./components/SendMoney";
+import NotFoundPage from "./components/nopage";
+import { SendMoney } from "./components/SendMoney";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
@@ -12,6 +13,7 @@ export default function App(){
         <Route path="signin" element={<Signin/>}></Route>
         <Route path="/dashboard" element={<Dashboard/>}></Route>
         <Route path="send" element={<SendMoney/>}></Route>
+        <Route path="*" element={<NotFoundPage/>}/>
 
 
       </Routes>

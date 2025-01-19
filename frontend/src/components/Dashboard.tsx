@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { SendMoney } from "./SendMoney"
 
 
 function Dashboard() {
@@ -21,6 +22,7 @@ function Dashboard() {
             <div className="ml-4 "><input type="text" placeholder="Search Users..." className="w-full p-1.5"></input></div>
 
         </div>
+        
 
 
 
