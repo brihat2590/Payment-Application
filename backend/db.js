@@ -32,4 +32,19 @@ const userSchema=new Schema({
 
 })
 
+const accountSchema=new Schema({
+    userId:{
+        type:mongoose.Types.ObjectId,
+        required:true,
+        ref:'User'
+
+    },
+    balance:{
+        type:Number,
+        required:true
+
+    }
+})
+
 export const User=mongoose.model("users",userSchema);
+export const Account=mongoose.model("Account",accountSchema)
