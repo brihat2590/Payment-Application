@@ -1,14 +1,15 @@
 import express from "express"
 const app=express()
-const UserRouter=express.Router();
+const router=express.Router();
 import jwt from "jsonwebtoken"
 import { z } from "zod";
-import { User } from "../db";
+import { User,Account } from "../db";
 import dotenv from "dotenv"
+dotenv.config()
 import { authmiddleware } from "../middleware";
-dotenv.config();
+
 app.use(express.json())
-UserRouter.post("/signup",async(req,res)=>{
+router.post("/signup",async(req,res)=>{
     const {username,password,firstName,lastName}=req.body;
     const requiredbody= z.object({
         username:z.string().min(4).max(10),
@@ -38,19 +39,19 @@ UserRouter.post("/signup",async(req,res)=>{
             firstName:firstName,
             lastName:lastName
         })
+        const userId=user._id;
+        await Account.create({
+            userId,
+            balance: 1 + Math.random() * 10000
+        })
         
-        const userId=user._id
-        const token=jwt.sign({
-            userId
-        },process.env.JWT_SECRET)
         res.status(200).send({
-            messasge:"the user has been created sucessfully",
-            token:token
+            message:"the user has been signed up"
         })
     }
 
 })
-UserRouter.post("/signin",async(req,res)=>{
+router.post("/signin",async(req,res)=>{
     const{username,password}=req.body;
     const requiredSigninBody=z.object({
         username:z.string().min(3).max(15),
@@ -90,7 +91,7 @@ UserRouter.post("/signin",async(req,res)=>{
     }
 })
 
-UserRouter.put("/",authmiddleware,async(req,res)=>{
+router.put("/",authmiddleware,async(req,res)=>{
     const{password,firstName,lastName}=req.body;
     const requiredUpdataBody=z.object({
         
@@ -111,5 +112,31 @@ UserRouter.put("/",authmiddleware,async(req,res)=>{
         message:"the user was update successfully"
     })
 })
+router.get("/bulk", async (req, res) => {
+    const filter = req.query.filter || "";
 
-export default UserRouter;
+    const users = await User.find({
+        $or: [{
+            firstName: {
+                "$regex": filter
+            }
+        }, {
+            lastName: {
+                "$regex": filter
+            }
+        }]
+    })
+
+    res.json({
+        user: users.map(user => ({
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            _id: user._id
+        }))
+    })
+})
+
+
+
+export default router;
