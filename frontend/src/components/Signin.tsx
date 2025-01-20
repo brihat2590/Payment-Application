@@ -1,7 +1,27 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signin = () => {
+  const[username,setUsername]=useState("")
+  const[password,setPassword]=useState("")
+  const navigate=useNavigate();
+  async function handleSubmit(e:any){
+    e.preventDefault();
+    const response=await axios.post("http://localhost:3000/api/v1/user/signin",{
+      username,password
+    })
+    const jwt=response.data.token;
+    localStorage.setItem("token",jwt);
+    navigate("/dashboard")
+    alert("you have been signed in ")
+    
+
+    
+    
+    
+
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
@@ -22,6 +42,9 @@ const Signin = () => {
               id="username"
               placeholder="johny"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              onChange={(e)=>{
+                setUsername(e.target.value)
+              }}
             />
           </div>
           <div className="mb-6">
@@ -36,11 +59,15 @@ const Signin = () => {
               id="password"
               placeholder="Enter your password"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              onChange={(e)=>{
+                setPassword(e.target.value)
+              }}
             />
           </div>
           <button
             type="submit"
             className="w-full py-2 px-4 bg-black text-white font-semibold rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+            onClick={handleSubmit}
           >
             Sign In
           </button>
