@@ -15,12 +15,12 @@ const Signin = () => {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700"
             >
-              Email
+              Username
             </label>
             <input
-              type="email"
-              id="email"
-              placeholder="johndoe@example.com"
+              type="username"
+              id="username"
+              placeholder="johny"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>

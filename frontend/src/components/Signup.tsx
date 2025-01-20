@@ -3,10 +3,17 @@
 //         <div className="bg-red-600 text-green-500">hello this is the signup page</div>
 //     )
 // }
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const[firstName,setFirstName]=useState("")
+  const[password,setPassword]=useState("")
+  const[email,setEmail]=useState("")
+  const[username,setUsername]=useState("")
+  const[lastName,setLastName]=useState("")
+  const navigate=useNavigate()
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
@@ -27,6 +34,7 @@ const Signup = () => {
               id="firstName"
               placeholder="John"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              onChange={(e)=>setFirstName(e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -41,6 +49,23 @@ const Signup = () => {
               id="lastName"
               placeholder="Doe"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              onChange={(e)=>setLastName(e.target.value)}
+            />
+            
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              placeholder="John"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              onChange={(e)=>setUsername(e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -55,6 +80,7 @@ const Signup = () => {
               id="email"
               placeholder="johndoe@example.com"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              onChange={(e)=>setEmail(e.target.value)}
             />
           </div>
           <div className="mb-6">
@@ -69,14 +95,27 @@ const Signup = () => {
               id="password"
               placeholder="Enter your password"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              onChange={(e)=>setPassword(e.target.value)}
             />
+            
           </div>
           <button
             type="submit"
             className="w-full py-2 px-4 bg-black text-white font-semibold rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+            onClick={async()=>{
+              await axios.post("http://localhost:3000/api/v1/user/signup",{
+                username,
+                firstName,lastName,email,password
+              })
+              navigate('/signin')
+              alert("you have signed up")
+
+            }}
+            
           >
             Sign Up
           </button>
+          
         </form>
         <p className="text-center text-sm text-gray-500 mt-4">
           Already have an account?{" "}
