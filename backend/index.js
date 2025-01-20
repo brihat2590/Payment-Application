@@ -1,12 +1,13 @@
 import express from "express"
 import cors from "cors"
+import router from "./routes/indexroute.js"
 const app=express()
 app.use(cors())
-import rootRouter from "./routes/indexroute"
-import User from "../db"
 
 
-app.use("/api/v1",rootRouter)
+
+
+app.use("/api/v1",router)
 
 
 

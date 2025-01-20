@@ -1,26 +1,30 @@
 import express from "express"
 const app=express()
-const router=express.Router();
+const userRouter=express.Router();
 import jwt from "jsonwebtoken"
 import { z } from "zod";
-import { User,Account } from "../db";
+import { User,Account } from "../db.js";
 import dotenv from "dotenv"
 dotenv.config()
-import { authmiddleware } from "../middleware";
+import { authmiddleware } from "../middleware.js";
 
-app.use(express.json())
-router.post("/signup",async(req,res)=>{
+
+userRouter.post("/signup",async(req,res)=>{
     const {username,password,firstName,lastName}=req.body;
     const requiredbody= z.object({
         username:z.string().min(4).max(10),
-        password:z.string().min(3).max(10)
+        password:z.string().min(3).max(10),
+        firstName:z.string(),
+        lastName:z.string()
     })
+   
+    const parsedData=requiredbody.safeParse(req.body);
+
     if(!parsedData.error){
         res.json({
             message:error.message
         })
     }
-    const parsedData=requiredbody.safeParse(req.body);
     const user=await User.findOne({
         username:username
 
@@ -51,7 +55,7 @@ router.post("/signup",async(req,res)=>{
     }
 
 })
-router.post("/signin",async(req,res)=>{
+userRouter.post("/signin",async(req,res)=>{
     const{username,password}=req.body;
     const requiredSigninBody=z.object({
         username:z.string().min(3).max(15),
@@ -91,7 +95,7 @@ router.post("/signin",async(req,res)=>{
     }
 })
 
-router.put("/",authmiddleware,async(req,res)=>{
+userRouter.put("/",authmiddleware,async(req,res)=>{
     const{password,firstName,lastName}=req.body;
     const requiredUpdataBody=z.object({
         
@@ -112,7 +116,7 @@ router.put("/",authmiddleware,async(req,res)=>{
         message:"the user was update successfully"
     })
 })
-router.get("/bulk", async (req, res) => {
+userRouter.get("/bulk", async (req, res) => {
     const filter = req.query.filter || "";
 
     const users = await User.find({
@@ -139,4 +143,4 @@ router.get("/bulk", async (req, res) => {
 
 
 
-export default router;
+export  {userRouter};

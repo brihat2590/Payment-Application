@@ -1,20 +1,34 @@
 import express from "express"
 const app=express()
 const router=express.Router();
-import { authmiddleware } from "../middleware";
-import { Account,User } from "../db";
+import { authmiddleware } from "../middleware.js";
+import { Account,User } from "../db.js";
 
 
 router.get("/balance",authmiddleware,async(req,res)=>{
-    const account=await Account.findOne({
-        userId:req.userId
-    })
-    res.json({
-        balance:account.balance
-    })
+    try{
+        const account=await Account.findOne({
+            userId:req.userId
+        })
+        if(!account){
+            res.json({
+                message:"the account does not exist"
+            })
+        }
+        res.json({
+            balance:account.balance
+        })
+
+    }
+    catch(error){
+        res.json({
+            message:error.message
+        })
+
+    }
 
 })
-router.post("/transfer", authMiddleware, async (req, res) => {
+router.post("/transfer", authmiddleware, async (req, res) => {
     const session = await mongoose.startSession();
 
     session.startTransaction();

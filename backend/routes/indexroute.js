@@ -1,8 +1,8 @@
 
 
 import express from "express";
-import userRouter from "./user"
-import accountRouter from "./account"
+import {userRouter} from "./user.js"
+import accountRouter from "./account.js"
 const app=express();
 
 
