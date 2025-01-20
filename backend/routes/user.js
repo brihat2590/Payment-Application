@@ -2,15 +2,17 @@ import express from "express"
 const app=express()
 const userRouter=express.Router();
 import jwt from "jsonwebtoken"
-import { z } from "zod";
+import  z  from "zod";
 import { User,Account } from "../db.js";
 import dotenv from "dotenv"
 dotenv.config()
 import { authmiddleware } from "../middleware.js";
+app.use(express.json())
 
 
 userRouter.post("/signup",async(req,res)=>{
-    const {username,password,firstName,lastName}=req.body;
+    const{username,password,firstName,lastName}=req.body
+    
     const requiredbody= z.object({
         username:z.string().min(4).max(10),
         password:z.string().min(3).max(10),
@@ -20,9 +22,9 @@ userRouter.post("/signup",async(req,res)=>{
    
     const parsedData=requiredbody.safeParse(req.body);
 
-    if(!parsedData.error){
+    if(parsedData.error){
         res.json({
-            message:error.message
+            message:"coudnot parse req.body"
         })
     }
     const user=await User.findOne({
@@ -61,8 +63,8 @@ userRouter.post("/signin",async(req,res)=>{
         username:z.string().min(3).max(15),
         password:z.string().min(4).max(15)
     })
-    const {parsedData}=requiredSigninBody.safeParse(req.body)
-    if(!parsedData){
+    const parsedData=requiredSigninBody.safeParse(req.body)
+    if(parsedData.error){
         res.json({
             message:"the format is incorrect"
         })
@@ -89,7 +91,7 @@ userRouter.post("/signin",async(req,res)=>{
     }
     catch(e){
         res.json({
-            message:e.message
+            message:"some error occured"
         })
 
     }

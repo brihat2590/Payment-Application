@@ -1,32 +1,17 @@
 import jwt from "jsonwebtoken"
-const JWT_SECRET=process.env.JWT_SECRET||"";
-
-export const authmiddleware=((req,res,next)=>{
-    const authHeader=req.headers.authorization;
-    if(!authHeader || !authHeader.startsWith("Bearer")){
-        res.status(404).send({
-            token:"failure in the retreival of the token"
-        })
+export const authmiddleware = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return res.status(401).json({ message: "Token missing or invalid" });
     }
-    const token=authHeader.split(" ")[1];
-    try{
-        const decoded=jwt.verify(token,JWT_SECRET)
-        if(decoded){
-            decoded.userId=req.userId;
-            next();
 
+    const token = authHeader.split(" ")[1];
 
-        }
-        else{
-            res.status(403).send({
-                message:"decode vayena"
-
-            })
-        }
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.userId = decoded.userId; // Correct assignment
+        next(); // Pass control to the next middleware/route
+    } catch (err) {
+        return res.status(403).json({ message: "Invalid or expired token" });
     }
-    catch(e){
-        res.json({
-            message:"some error occured in middleware"
-        })
-    }
-})
+};

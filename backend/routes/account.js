@@ -3,6 +3,7 @@ const app=express()
 const router=express.Router();
 import { authmiddleware } from "../middleware.js";
 import { Account,User } from "../db.js";
+import mongoose from "mongoose";
 
 
 router.get("/balance",authmiddleware,async(req,res)=>{
