@@ -1,10 +1,22 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 import Users from "./Users"
 
 
 function Dashboard() {
     const[open,setOpen]=useState(false)
+    const[balance,setBalance]=useState(0)
+    useEffect(()=>{
+        axios.get("http://localhost:3000/api/v1/account/balance",{
+            headers:{
+                Authorization:`Bearer ${localStorage.getItem("token")}`
+            }
+        }).then((response)=>{
+            setBalance(response.data.balance)
+        })
+        
+    },[])
   return (
     <div className="h-screen w-full flex flex-col ">
         <div className="flex items-center justify-between border-b border-2">
@@ -19,7 +31,7 @@ function Dashboard() {
 
         </div>
         <div>
-            <div className="p-2 m-3">Your balance is :</div>
+            <div className="p-2 m-3">Your balance is {Math.floor(balance)}</div>
             <Users/>
             
 

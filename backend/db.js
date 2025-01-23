@@ -20,7 +20,7 @@ const userSchema=new Schema({
         type:String,
         
         minLength:5,
-        maxLenght:15
+        maxLength:15
     },
     firstName:String,
     lastName:String
