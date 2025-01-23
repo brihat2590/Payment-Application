@@ -1,16 +1,32 @@
 import axios from "axios";
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 
 export const SendMoney = () => {
     const[searchParams]=useSearchParams();
     const[amount,setAmount]=useState<number>(0)
+    const navigate=useNavigate();
     
     const id=searchParams.get("id");
     const name=searchParams.get("name")
     function handleChange(e:any){
         const response=parseInt(e.target.value)
         setAmount(response)
+    }
+    function handleSubmit(e:any){
+        e.preventDefault();
+        axios.post("http://localhost:3000/api/v1/account/transfer", {
+            to: id,
+            amount
+        }, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+        })
+        alert(`the money has been succesfully transferred to ${name}`)
+        navigate("/dashboard")
+        
+
     }
 
 
@@ -47,16 +63,7 @@ export const SendMoney = () => {
                         onChange={handleChange}
                     />
                     </div>
-                    <button className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white" onClick={()=>{
-                       axios.post("http://localhost:3000/api/v1/account/transfer", {
-                        to: id,
-                        amount
-                    }, {
-                        headers: {
-                            Authorization: "Bearer " + localStorage.getItem("token")
-                        }
-                    })
-                    }}>
+                    <button className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white" onClick={handleSubmit}>
                         Initiate Transfer
                     </button>
                 </div>

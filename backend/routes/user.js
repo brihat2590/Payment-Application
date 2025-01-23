@@ -60,8 +60,8 @@ userRouter.post("/signup",async(req,res)=>{
 userRouter.post("/signin",async(req,res)=>{
     const{username,password}=req.body;
     const requiredSigninBody=z.object({
-        username:z.string().min(3).max(15),
-        password:z.string().min(4).max(15)
+        username:z.string().min(4).max(15),
+        password:z.string().min(3).max(15)
     })
     const parsedData=requiredSigninBody.safeParse(req.body)
     if(parsedData.error){
