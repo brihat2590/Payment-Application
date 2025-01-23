@@ -3,6 +3,7 @@ import axios from "axios"
 import User from "./user"
 
 import Users from "./Users"
+import Logout from "./logout"
 
 
 function Dashboard() {
@@ -27,6 +28,7 @@ function Dashboard() {
                 <div className="rounded-full h-10 w-10 bg-slate-200 flex justify-center mt-1 mr-2 ml-2">
                     <div className="flex flex-col justify-center h-full text-xl">U</div>
                 </div>
+                <div><Logout/></div>
                 
             </div>
 
