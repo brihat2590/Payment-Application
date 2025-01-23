@@ -83,7 +83,8 @@ userRouter.post("/signin",async(req,res)=>{
             userId:user._id
         },process.env.JWT_SECRET)
         res.json({
-            token:token
+            token:token,
+            user:user
         })
         return;
 
@@ -95,6 +96,15 @@ userRouter.post("/signin",async(req,res)=>{
         })
 
     }
+})
+
+userRouter.get("/user",authmiddleware,async(req,res)=>{
+    const Id=req.userId;
+    const user=await User.findById(Id)
+    res.json({
+        user:user
+    })
+
 })
 
 userRouter.put("/",authmiddleware,async(req,res)=>{
