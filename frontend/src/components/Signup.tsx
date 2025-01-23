@@ -13,7 +13,18 @@ const Signup = () => {
   const[email,setEmail]=useState("")
   const[username,setUsername]=useState("")
   const[lastName,setLastName]=useState("")
-  const navigate=useNavigate()
+  const navigate=useNavigate();
+  function handleSubmit(e:any){
+    e.preventDefault();
+    axios.post("http://localhost:3000/api/v1/user/signup",{
+      username,password,firstName,lastName,email
+    })
+    navigate("/signin");
+    alert("you have been sucessfully signed up")
+    
+  
+
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
@@ -102,15 +113,7 @@ const Signup = () => {
           <button
             type="submit"
             className="w-full py-2 px-4 bg-black text-white font-semibold rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
-            onClick={async()=>{
-              await axios.post("http://localhost:3000/api/v1/user/signup",{
-                username,
-                firstName,lastName,email,password
-              })
-              navigate('/signin')
-              alert("you have signed up")
-
-            }}
+            onClick={handleSubmit}
             
           >
             Sign Up
