@@ -10,7 +10,7 @@ export default function Logout(){
     }
     return(
         <div>
-            <button onClick={handlelogout}>logout</button>
+            <button onClick={handlelogout} className="border-2 border-transparent p-2 m-2 bg-blue-300 rounded-lg w-15 shadow-lg">logout</button>
         </div>
     )
 }

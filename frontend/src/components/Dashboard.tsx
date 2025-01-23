@@ -24,9 +24,10 @@ function Dashboard() {
         <div className="flex items-center justify-between border-b border-2">
             <div className="p-3 m-2 text-3xl font-semibold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent ">Payments</div>
             <div className="flex justify-center items-center m-2 p-3">
-                <div className="p-3 m-2 text-xl">hello {<User/>}</div>
+                <div className="pt-3 pr-3 pb-3  m-1 text-xl bg-gradient-to-r from-blue-300 to-blue-600 bg-clip-text text-transparent">Hello</div>
+                <div className="pt-3 pr-3 pb-3  text-lg font-semibold">{<User/>}</div>
                 <div className="rounded-full h-10 w-10 bg-slate-200 flex justify-center mt-1 mr-2 ml-2">
-                    <div className="flex flex-col justify-center h-full text-xl">U</div>
+                    <div className="flex flex-col justify-center h-full text-xl ">U</div>
                 </div>
                 <div><Logout/></div>
                 
