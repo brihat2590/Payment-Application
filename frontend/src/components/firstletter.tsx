@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from "axios";
 
-export default function User(){
+export default function FirstLetter(){
     const [user,setUser]=useState("")
     useEffect(()=>{
         axios.get('http://localhost:3000/api/v1/user/user',{
@@ -18,7 +18,7 @@ export default function User(){
    
     return(
         <div>
-            {user}
+            {user[0]}
             
 
         </div>
