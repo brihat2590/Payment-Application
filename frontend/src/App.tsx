@@ -1,5 +1,6 @@
 import Dashboard from "./components/Dashboard";
 import NotFoundPage from "./components/nopage";
+import PrivateRoute from "./components/privateRoute";
 import { SendMoney } from "./components/SendMoney";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
@@ -11,7 +12,12 @@ export default function App(){
       <Routes>
         <Route path="/signup" element={<Signup/>}></Route>
         <Route path="signin" element={<Signin/>}></Route>
-        <Route path="/dashboard" element={<Dashboard/>}></Route>
+        <Route path="/dashboard" element={
+          <PrivateRoute>
+            <Dashboard/>
+          </PrivateRoute>
+          
+          }></Route>
         <Route path="/send" element={<SendMoney/>}></Route>
         <Route path="*" element={<NotFoundPage/>}/>
 
