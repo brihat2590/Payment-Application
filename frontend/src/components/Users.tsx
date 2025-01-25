@@ -55,7 +55,7 @@ function User({user}:any) {
         </div>
 
         <div className="flex flex-col p-4   ">
-            <button className="p-2 ml-12 rounded-md text-neutral-300  bg-gray-800 cursor-pointer" onClick={()=>navigate("/send?id="+user._id+"&name="+user.firstName)} >Send Money</button>
+            <button className=" ml-12 rounded-md text-neutral-300  bg-gray-800 cursor-pointer p-2 hover:bg-gray-600" onClick={()=>navigate("/send?id="+user._id+"&name="+user.firstName)} >Send Money</button>
         </div>
     </div>
 }

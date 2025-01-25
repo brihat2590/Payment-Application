@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import NavIcon from "../icon/navicon";
 
 export default function Navbar(){
@@ -15,14 +16,14 @@ export default function Navbar(){
 
             </div>
             <div className="flex items-center">
-                <div className="bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:bg-blue-800 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-offset-2 transition-all duration-200 disabled:bg-gray-300 cursor-pointer p-2 m-2">
+                <Link to={"/signup"}><div className="bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:bg-blue-800 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-offset-2 transition-all duration-200 disabled:bg-gray-300 cursor-pointer p-2 m-2">
                     Signup
 
-                </div>
-                <div className="bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:bg-blue-800 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-offset-2 transition-all duration-200 disabled:bg-gray-300 cursor-pointer p-2 mr-4 mt-2 mb-2 ml-2">
+                </div></Link>
+                <Link to={"/signin"}><div className="bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:bg-blue-800 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-offset-2 transition-all duration-200 disabled:bg-gray-300 cursor-pointer p-2 mr-4 mt-2 mb-2 ml-2">
                     SignIn
 
-                </div>
+                </div></Link>
             </div>
         </div>
     )
