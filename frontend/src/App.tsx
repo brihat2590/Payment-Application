@@ -1,5 +1,6 @@
 import Dashboard from "./components/Dashboard";
 import LandingPage from "./components/Landing";
+import Land from "./components/nextpage";
 import NotFoundPage from "./components/nopage";
 import PrivateRoute from "./components/privateRoute";
 import { SendMoney } from "./components/SendMoney";
@@ -11,9 +12,10 @@ export default function App(){
   return(
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPage/>}></Route>
+        <Route path="/landing" element={<LandingPage/>}></Route>
         <Route path="/signup" element={<Signup/>}></Route>
         <Route path="signin" element={<Signin/>}></Route>
+        <Route path="/" element={<Land/>}/>
         <Route path="/dashboard" element={
           <PrivateRoute>
             <Dashboard/>
