@@ -22,8 +22,8 @@ function Dashboard() {
         
     },[])
   return (
-    <div className="h-screen w-full flex flex-col overflow-hidden ">
-        <div className="flex items-center justify-between border-b border-2 ">
+    <div className="min-h-screen w-full flex flex-col   ">
+        <div className="flex items-center justify-between border-b border-2  ">
             <div className="p-3 m-2 text-2xl font-semibold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent  md:text-5xl ml-3">Payments</div>
             <div className="flex justify-center items-center m-2 p-3">
                 <div className="pt-3 pr-3 pb-3  m-1 text-xl bg-gradient-to-r from-blue-300 to-blue-600 bg-clip-text text-transparent">Hello</div>
@@ -37,7 +37,7 @@ function Dashboard() {
             </div>
 
         </div>
-        <div>
+        <div className="flex-1">
             <div className="p-2 m-3 ">Your balance is {Math.floor(balance)}</div>
             <Users/>
             
@@ -45,6 +45,7 @@ function Dashboard() {
 
         </div>
         <Footer/>
+        
         
 
         
