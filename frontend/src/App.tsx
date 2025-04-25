@@ -1,6 +1,6 @@
 import Dashboard from "./components/Dashboard";
 import LandingPage from "./components/Landing";
-import Land from "./components/nextpage";
+import Land from "./components/nextpage"
 import NotFoundPage from "./components/nopage";
 import PrivateRoute from "./components/privateRoute";
 import { SendMoney } from "./components/SendMoney";

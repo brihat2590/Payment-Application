@@ -1,11 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const HeroSection: React.FC = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const navigate=useNavigate()
+  
 
   useEffect(() => {
     if (titleRef.current) {
@@ -64,7 +70,7 @@ const HeroSection: React.FC = () => {
             
             <button 
               ref={buttonRef}
-              onClick={scrollToGetStarted}
+              onClick={()=>{navigate("/signup")}}
               className="mt-8 bg-gradient-to-r from-blue-600 to-cyan-400 text-white px-8 py-3 rounded-full text-lg flex items-center opacity-0 transition-all duration-700 delay-600 hover:shadow-lg transform hover:-translate-y-1"
             >
               Get Started

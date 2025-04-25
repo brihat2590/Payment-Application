@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate=useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,14 +54,14 @@ const Navbar: React.FC = () => {
             >
               How it Works
             </button>
-            <button 
+            {/* <button 
               onClick={() => scrollToSection('testimonials')}
               className="text-gray-700 hover:text-blue-600 transition-colors duration-200"
             >
               Testimonials
-            </button>
+            </button> */}
             <button 
-              onClick={() => scrollToSection('get-started')}
+              onClick={() =>navigate("/signup") }
               className="bg-gradient-to-r from-blue-600 to-cyan-400 text-white px-4 py-2 rounded-full hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1"
             >
               Get Started

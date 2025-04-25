@@ -19,7 +19,7 @@ export default function Land(){
       <HowItWorksSection />
       <AppScreensSection />
      
-      <GetStartedSection />
+      
       <Footer />
     </div>
   );
